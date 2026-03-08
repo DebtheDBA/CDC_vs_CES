@@ -1,4 +1,4 @@
-USE StackOverflow_CDC
+﻿USE StackOverflow_CDC
 GO
 
 /* Check Database Log Usage 
@@ -83,6 +83,20 @@ SELECT CASE WHEN duration = 0
     END AS [Throughput] 
 FROM sys.dm_cdc_log_scan_sessions 
 WHERE session_id = 0
+
+
+/**************************************************/
+-- CDC Monitoring
+
+/* 
+Reports the internal CDC log‑scan sessions. 
+Use it to monitor log‑scan progress, throughput, errors and latency. 
+*/
+SELECT * FROM sys.dm_cdc_log_scan_sessions
+
+
+/* Check for errors */
+SELECT * FROM sys.dm_cdc_errors
 
 
 

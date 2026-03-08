@@ -1,7 +1,7 @@
 USE StackOverflow_CDC
 GO
 
-/* See if I'm here  yet */
+/* See if I'm here yet */
 SELECT * FROM dbo.users
 WHERE DisplayName = 'Deb the DBA';
 
@@ -106,10 +106,11 @@ SELECT * FROM cdc.dbo_Users_CT;
 COMMIT TRANSACTION MultipleUpdates
 
 WAITFOR DELAY '00:00:05.000'
+
 -- check again
 SELECT * FROM cdc.dbo_Users_CT
 
-
+/**********************************/
 -- show differences between all & net with different options with each
 
 DECLARE 
@@ -138,12 +139,16 @@ ORDER BY [__$start_lsn];
 SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(@min_lsn, @max_lsn, N'all with mask')
 ORDER BY [__$start_lsn];
 
+
+
+
+
 -- get the lsns from one of the changes and manually run a net change function
 
-SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000F6A80003, 0x000000350000F7180001, N'all with merge')
+SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000C0580003, 0x000000350000C0A80001, N'all with merge')
 ORDER BY [__$start_lsn];
 
-SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000F6A80003, 0x000000350000F7180001, N'all with mask')
+SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000C0580003, 0x000000350000C0A80001, N'all with mask')
 ORDER BY [__$start_lsn];
 
 /* Delete me */
@@ -154,3 +159,16 @@ WHERE DisplayName = 'Deb the DBA';
 SELECT * FROM cdc.dbo_Users_CT;
 GO
 
+/** Check using the net changes function **/
+DECLARE 
+	@min_lsn BINARY(10),	-- holds the min LSN to say when we start getting values from
+	@max_lsn BINARY(10)
+
+/* Set the starting date & min_lsn */
+SELECT @min_lsn = min([__$start_lsn]),
+	@max_lsn = max([__$start_lsn])
+FROM cdc.dbo_Users_CT
+	
+SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(@min_lsn, @max_lsn, N'all')
+ORDER BY [__$start_lsn];
+GO

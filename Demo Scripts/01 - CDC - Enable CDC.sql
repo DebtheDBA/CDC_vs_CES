@@ -60,25 +60,13 @@ ORDER BY SchemaName, name
 /**************************************************/
 -- Look at the jobs linked to CDC
 
-SELECT * FROM msdb.dbo.sysjobs AS jobs
+SELECT * 
+FROM msdb.dbo.sysjobs AS jobs
     JOIN msdb.dbo.cdc_jobs AS cdc ON cdc.job_id = jobs.job_id
 
 
 /**************************************************/
--- Monitoring
-
-/* 
-Reports the internal CDC log‑scan sessions. 
-Use it to monitor log‑scan progress, throughput, errors and latency. 
-*/
-SELECT * FROM sys.dm_cdc_log_scan_sessions
-
-
-/* Check for errors */
-SELECT * FROM sys.dm_cdc_errors
-
-
-
+/* Optional Demo */
 
 /* 
 disable CDC at the end...
