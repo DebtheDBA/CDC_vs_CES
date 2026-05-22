@@ -2,7 +2,7 @@
 This will create the test databases based on the backup file provided. 
 This can be used to create a StackOverflow_CDC or StackOverflow_CES.
 
-You can find the file here: https://demodatabasebackup.blob.core.windows.net/stackoverflow-cdc-ces-backup/StackOverflow_CDC_CES_Initial.bak
+You can find the file here: https://cdcvscesdemodbbackup.blob.core.windows.net/stackoverflow-cdc-ces-backup/StackOverflow_CDC_CES_Initial.bak
 
 NOTE: The backup is created from SQL Server 2025 instance.
 
