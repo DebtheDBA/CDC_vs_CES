@@ -55,8 +55,8 @@ WITH ROLLBACK IMMEDIATE
 RESTORE DATABASE [<DatabaseToCreate, sysname, StackOverflow_CDC>]
 FROM DISK = @backuplocation
 WITH FILE = 1,
-     MOVE N'StackOverflow_CES' TO @mdflocation,
-     MOVE N'StackOverflow_CES_log' TO @ldflocation,
+     MOVE N'<DatabaseToCreate, sysname, StackOverflow_CDC>' TO @mdflocation,
+     MOVE N'<DatabaseToCreate, sysname, StackOverflow_CDC>_log' TO @ldflocation,
      NOUNLOAD,
      REPLACE,
      STATS = 5;

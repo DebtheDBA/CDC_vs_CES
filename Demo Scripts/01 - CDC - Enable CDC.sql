@@ -93,7 +93,7 @@ SELECT SCHEMA_NAME(schema_id) AS SchemaName,
     name AS TableName,
     object_id,
     is_tracked_by_cdc
-FROM sys.tabless
+FROM sys.tables
 ORDER BY SchemaName, name
 
 

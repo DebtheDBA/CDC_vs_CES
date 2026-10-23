@@ -6,6 +6,7 @@ GO
 SELECT * FROM users
 WHERE DisplayName = 'Deb the DBA'
 
+
 IF NOT EXISTS 
     (SELECT * FROM users
     WHERE DisplayName = 'Deb the DBA')
@@ -27,7 +28,7 @@ VALUES
     N'Deb the DBA',       -- DisplayName - nvarchar(40)
     0,         -- DownVotes - int
     GETDATE(), -- LastAccessDate - datetime
-    'SQLCON',  -- Location - nvarchar(100)
+    'SummitWest',  -- Location - nvarchar(100)
     0,         -- Reputation - int
     0,         -- UpVotes - int
     0         -- Views - int

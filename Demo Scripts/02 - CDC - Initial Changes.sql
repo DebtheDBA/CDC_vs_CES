@@ -29,7 +29,7 @@ VALUES
     N'Deb the DBA',       -- DisplayName - nvarchar(40)
     0,         -- DownVotes - int
     GETDATE(), -- LastAccessDate - datetime
-    'SQLCON',  -- Location - nvarchar(100)
+    'SummitWest',  -- Location - nvarchar(100)
     0,         -- Reputation - int
     0,         -- UpVotes - int
     0         -- Views - int
@@ -122,7 +122,7 @@ SELECT @min_lsn = min([__$start_lsn]),
 	@max_lsn = max([__$start_lsn])
 FROM cdc.dbo_Users_CT
 	
---SELECT @min_lsn, @max_lsn
+SELECT @min_lsn, @max_lsn
 
 SELECT * FROM cdc.fn_cdc_get_all_changes_dbo_Users(@min_lsn, @max_lsn, N'all')
 ORDER BY [__$start_lsn];
@@ -143,12 +143,12 @@ ORDER BY [__$start_lsn];
 
 
 
--- get the lsns from one of the changes and manually run a net change function
+-- NOTE: get the lsns from one of the changes and manually run a net change function
 
-SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000C0580003, 0x000000350000C0A80001, N'all with merge')
+SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000F0700035, 0x000000350000F3980001, N'all with merge')
 ORDER BY [__$start_lsn];
 
-SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000C0580003, 0x000000350000C0A80001, N'all with mask')
+SELECT * FROM cdc.fn_cdc_get_net_changes_dbo_Users(0x000000350000F0700035, 0x000000350000F3980001, N'all with mask')
 ORDER BY [__$start_lsn];
 
 /* Delete me */

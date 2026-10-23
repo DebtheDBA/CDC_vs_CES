@@ -23,7 +23,7 @@ DECLARE @begin_time DATETIME,
     @begin_lsn BINARY (10),
     @end_lsn BINARY (10);
 
-SET @begin_time = '2026-01-13 12:00:00.000';
+SET @begin_time = '2026-10-13 12:00:00.000';
 SET @end_time = GETDATE();
 
 SELECT @begin_lsn = sys.fn_cdc_map_time_to_lsn('smallest greater than', @begin_time);
